@@ -20,6 +20,7 @@ import org.drools.logger.KnowledgeRuntimeLoggerFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 
 
+@SuppressWarnings("unused")
 public class Core {
 	protected static KnowledgeBase globalKbase;
 
@@ -57,8 +58,8 @@ public class Core {
             // load up the knowledge base which contains the rules
             StatefulKnowledgeSession ksession = globalKbase.newStatefulKnowledgeSession();
             
-            // setup logger
-            KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "test");	
+            // setup logger for debugging. Remember to logger.close();
+            //KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "test");	
  
             // insert input
             ksession.insert(input);
@@ -75,7 +76,7 @@ public class Core {
             ksession2.fireAllRules();
 
             // end
-			logger.close();
+			//logger.close();
 	        return input.getSecondaryTagStems();
         } catch (Throwable t) {
             t.printStackTrace();

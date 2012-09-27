@@ -219,7 +219,6 @@ follows:
 | How to Compile |
 \================/
 
-If you only need to run the project, jump to the "How To Run" section. 
 To compile from source, you first need to setup the environment. To do 
 so, follow these steps:
 1- Download and install JDK, if you don't already have it.
