@@ -23,6 +23,11 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.metal.MetalLookAndFeel;  
 
 public class TristateCheckBox extends JCheckBox {  
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static class State {  
 		private String desc = "";  
 
@@ -63,11 +68,21 @@ public class TristateCheckBox extends JCheckBox {
 		// Reset the keyboard action map  
 		ActionMap map = new ActionMapUIResource();  
 		map.put("pressed", new AbstractAction() {  
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public void actionPerformed(ActionEvent e) {  
 				TristateCheckBox.this.mousePressed();  
 			}  
 		});  
 		map.put("released", new AbstractAction() {  
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public void actionPerformed(ActionEvent e) {  
 				TristateCheckBox.this.mouseReleased();  
 			}  
@@ -277,6 +292,11 @@ public class TristateCheckBox extends JCheckBox {
 
 	private class TristateCheckBoxIcon implements Icon, UIResource,  
 	Serializable {  
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		protected int getControlSize() {  
 			return 13;  

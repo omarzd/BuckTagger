@@ -78,20 +78,24 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+//import java.io.BufferedReader;
+//import java.io.DataInputStream;
+//import java.io.FileInputStream;
+//import java.io.InputStreamReader;
+//import java.io.PrintWriter;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JCheckBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
+//import javax.swing.filechooser.FileNameExtensionFilter;
+//import javax.swing.DefaultListModel;
+//import javax.swing.JFileChooser;
+import javax.swing.JTabbedPane;
+//import javax.swing.JList;
+//import javax.swing.border.LineBorder;
+//import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -107,10 +111,6 @@ import javax.swing.JButton;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.swing.JTabbedPane;
-import javax.swing.JList;
-import javax.swing.border.LineBorder;
-import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -151,7 +151,7 @@ public class MainFrame extends JFrame {
 				    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
 				    frame.setLocation( (screensize.width - frame.getWidth())/2,
 				    		(screensize.height - frame.getHeight())/2 );
-				    frame.setDefaultLookAndFeelDecorated(false);
+				    MainFrame.setDefaultLookAndFeelDecorated(false);
 					frame.setVisible(true);
 
 					// After setting the frame, read the rules from the rules table

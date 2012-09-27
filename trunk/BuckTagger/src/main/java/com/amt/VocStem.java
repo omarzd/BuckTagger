@@ -25,7 +25,7 @@ package com.amt;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
+//import javax.swing.JOptionPane;
 //import org.mvel2.ast.RegExMatch;
 
 /* This class represents the input word after vocalization and stemming.
