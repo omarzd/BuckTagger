@@ -234,12 +234,15 @@ public class VocStem {
 		String result = "";
 		int length = modSStem.length();
 			for(int i=0;i<length;i++){
-				result += modSStem.charAt(i) + diacs.get(i);
+				result += modSStem.charAt(i); 
+				if(i<diacs.size())		
+					result += diacs.get(i);
 			}
 		return result;
 	}
 	
 	// stores the diacratized stems before unvocalizing them
+	// TODO shadda is tricky. see output for يمنّ
 	public void storeDiacritics(){
 		diacs.clear();
 		int modSStemLength = getUnvocalized().length();
