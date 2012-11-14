@@ -41,7 +41,9 @@ public class VocStem {
 	public static final String KASRA = "ِ";
 	public static final String SHADDA = "ّ";
 	public static final String ALIF = "ا";
-	public static final String[] DIACRITICS = {"َ","ً","ُ","ٌ","ِ","ٍ","ّ","ْ"};
+	public static final String[] DIACS_arr = {"َ","ً","ُ","ٌ","ِ","ٍ","ّ","ْ"};
+	public static final String DIACS_str = "ًٌٍَُِّْ";
+	public static final String DIACS_regex = "[ًٌٍَُِّْ]";
 	public static final String[] IMP_LETTERS = {"ت", "ي", "ن", "أ"};
 	
 	// instance variables
@@ -69,6 +71,7 @@ public class VocStem {
 	
 	public VocStem(String stem) {
 		this.stem = stem;
+		System.out.println(isDiac('َ'));
 		estimStemClass();
 		estimStemSubClass();
 		estimIsBeforeLastDblOrVowel();
@@ -226,7 +229,7 @@ public class VocStem {
 	
 	// returns the word unvocalized (undiacritized)
 	public String getUnvocalized() {
-		return stem.replaceAll("[ًٌٍَُِّْ]", "");
+		return stem.replaceAll(DIACS_regex, "");
 	}
 	
 	// restores the diacritics on the unvocalized stems
@@ -252,11 +255,18 @@ public class VocStem {
 		int length=stem.length();
 		int pos=-1;
 		for(int i=0;i<length;i++){
-			if("ًٌٍَُِّْ".indexOf(stem.charAt(i)) > -1)
+			if(isDiac(stem.charAt(i)))
 				diacs.set(pos, diacs.get(pos).concat(stem.charAt(i)+""));
 			else
 				pos++;
 		}
+	}
+	
+	// is the character a diacritical sign
+	public boolean isDiac(char c) {
+		return DIACS_str.indexOf(c) > -1;
+		
+		
 	}
 	
 	// returns last letter as a string
@@ -296,14 +306,14 @@ public class VocStem {
 	
 	// returns true if the specified diacritical mark is on the last letter
 	public boolean isLastDiac(String diac) {
-		// TODO needs a clearer implementation. Perhaps we should keep an unvocalized string and a separate array of characters carrying diacritics in their corresponding positions.
+		// TODO should use the diacs array used in storeDiacs()
 		// TODO Auto Diacritization needed here
 		return stem.matches(".+"+diac+"[ًٌٍَُِ]?");
 	}
 	
 	// returns true if the specified diacritical mark is on the letter before last
 	public boolean isBeforeLastDiac(String diac) {
-		// TODO needs a clearer implementation. Perhaps we should keep an unvocalized string and a separate array of characters carrying diacritics in their corresponding positions.
+		// TODO should use the diacs array used in storeDiacs()
 		// TODO Auto Diacritization needed here
 		return stem.matches(".+"+diac+"[ء-ي][ّ]?[ًٌٍَُِْ]?");
 	}
@@ -401,7 +411,7 @@ public class VocStem {
 
 	public static String removeDiacritics(String input){
     	String result = input;
-    	for(String  d : DIACRITICS){
+    	for(String  d : DIACS_arr){
     		result = result.replace(d, "");
     	}
     	return result;
