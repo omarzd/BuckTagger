@@ -69,6 +69,7 @@
  
  
 package com.amt;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.ComponentOrientation;
 import java.awt.Color;
@@ -96,6 +97,7 @@ import javax.swing.JTabbedPane;
 //import javax.swing.JList;
 //import javax.swing.border.LineBorder;
 //import java.awt.Font;
+import javax.swing.AbstractButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -114,20 +116,23 @@ import java.util.Iterator;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
-
+	public static final int NUM_OF_LANGS = 2;
 	private JPanel contentPane;
+	protected static JPanel panel;
 	protected static VocStem stem; // only one stem will be processed at a time.
-	protected static JTextField txtPrimaryTag;
-	protected static JTextArea txtSecondaryTags;
+	protected static JComboBox comboBoxClass;
+	protected static JComboBox comboBoxSubClass;
 	protected static JTextField txtStem;
-	protected static JTextField txtInputFile;
-	protected static JButton submitButton;
-	protected static JCheckBox chkBeforeLastHamza;
-	protected static JCheckBox chkBeforeLastDblOrVowel;
-	protected static JCheckBox chkFirstHamza;
+	protected static JCheckBox chkTransitive;
 	protected static JCheckBox chkImpYa;
 	protected static JCheckBox chkPassive;
-	protected static JCheckBox chkTransitive;
+	protected static JCheckBox chkFirstHamza;
+	protected static JCheckBox chkBeforeLastDblOrVowel;
+	protected static JCheckBox chkBeforeLastHamza;
+	protected static JButton btnSubmit;
+	protected static JTextField txtPrimaryTag;
+	protected static JTextArea txtSecondaryTags;
+	protected static JTextField txtInputFile;
 	/*
 	//this is used for tristate checkboxes
 	private static void refreshAllCheckBoxes() {
@@ -167,11 +172,11 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
-		setTitle("واسم");
+		setTitle("BuckTagger واسم");
 		setResizable(false);
 		this.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 388, 402);
+		setBounds(100, 100, 388, 473);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -180,10 +185,10 @@ public class MainFrame extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setEnabled(false);
 		tabbedPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		tabbedPane.setBounds(10, 11, 362, 352);
+		tabbedPane.setBounds(10, 36, 362, 400);
 		contentPane.add(tabbedPane);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		tabbedPane.addTab("يدوي", null, panel, null);
 		panel.setLayout(null);
 		
@@ -197,17 +202,17 @@ public class MainFrame extends JFrame {
 		//txtSecondaryTags.setBounds(35, 254, 219, 55);
 		JScrollPane areaScrollPane = new JScrollPane(txtSecondaryTags);
 		areaScrollPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		areaScrollPane.setBounds(35, 254, 219, 55);
+		areaScrollPane.setBounds(35, 254, 219, 107);
 		areaScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		panel.add(areaScrollPane );
 		
-		JLabel label = new JLabel("أوسمة فرعية");
+		JLabel label = new JLabel("أفرع");
 		label.setHorizontalAlignment(SwingConstants.RIGHT);
 		label.setBounds(258, 257, 76, 14);
 		panel.add(label);
 		
-		JLabel label_1 = new JLabel("وسم رئيس");
+		JLabel label_1 = new JLabel("رئيس");
 		label_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		label_1.setBounds(259, 234, 76, 14);
 		panel.add(label_1);
@@ -221,10 +226,10 @@ public class MainFrame extends JFrame {
 		txtPrimaryTag.setBounds(35, 231, 219, 20);
 		panel.add(txtPrimaryTag);
 		
-		submitButton = new JButton("إدخال");
-		submitButton.addActionListener(new ActionListener() {
+		btnSubmit = new JButton("إدخال");
+		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MainFrame.submitButton.requestFocusInWindow();
+				MainFrame.btnSubmit.requestFocusInWindow();
 				try {
 		        	
 		        	if(stem!=null){
@@ -243,17 +248,27 @@ public class MainFrame extends JFrame {
 			            System.out.println("=======2ND CALL=======");
 			    		Core.doMagic(stem);
 			    		// The user does not have to see a complete Buckwalter stem entry format like in the file "dictStems".
+			    		
+			    		
 			    		// some post-processing: remove Imperfective Letter "ya/yu"--and the likes--to match Buckwalter's stems.
 			    		// remove it from the primary tag's stem
-			    		String inppp = Core.removeImp(in);
+		    			String inppp = in;
 			    		// remove it from the list of secondary tag stems
 			    		ArrayList<TagStem> ins = stem.getSecondaryTagStems();
 			    		ArrayList<TagStem> inspp = new ArrayList<TagStem> () ;
 			    		Iterator<TagStem> it = ins.iterator();
-			    		while(it.hasNext()) {
-			    			TagStem ts = it.next();
-			    			//txtSecondaryTags.append(new TagStem(ts.getSecondaryTag(), Core.removeImp(ts.getSecondaryStem()),Core.removeImp(ts.getDiacritizedStem())).toString() + "\n");
-			    			inspp.add(new TagStem(ts.getSecondaryTag(), Core.removeImp(ts.getSecondaryStem()),Core.removeImp(ts.getDiacritizedStem())));
+			    		if(stem.getStemSubClass() == "imperfect") {
+			    			inppp = Core.removeImp(in);
+				    		while(it.hasNext()) {
+				    			TagStem ts = it.next();
+				    			//txtSecondaryTags.append(new TagStem(ts.getSecondaryTag(), Core.removeImp(ts.getSecondaryStem()),Core.removeImp(ts.getDiacritizedStem())).toString() + "\n");
+				    			inspp.add(new TagStem(ts.getSecondaryTag(), Core.removeImp(ts.getSecondaryStem()),Core.removeImp(ts.getDiacritizedStem())));
+				    		}
+			    		} else {
+				    		while(it.hasNext()) {
+				    			TagStem ts = it.next();
+				    			inspp.add(new TagStem(ts.getSecondaryTag(), ts.getSecondaryStem(),ts.getDiacritizedStem()));
+				    		}
 			    		}
 			    		// show user final result
 				        System.out.println("=======RESULTS========");
@@ -270,11 +285,11 @@ public class MainFrame extends JFrame {
 			}
 			
 		});
-		submitButton.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		submitButton.setBounds(35, 201, 89, 23);
-		panel.add(submitButton);
+		btnSubmit.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		btnSubmit.setBounds(35, 201, 89, 23);
+		panel.add(btnSubmit);
 		
-		chkBeforeLastHamza = new JCheckBox("قبل آخره همزة");
+		chkBeforeLastHamza = new JCheckBox("عينه همزة");
 		chkBeforeLastHamza.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		chkBeforeLastHamza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -283,10 +298,10 @@ public class MainFrame extends JFrame {
 					stem.setBeforeLastHamza(chkbox.isSelected());
 			}
 		});
-		chkBeforeLastHamza.setBounds(62, 171, 97, 23);
+		chkBeforeLastHamza.setBounds(21, 171, 138, 23);
 		panel.add(chkBeforeLastHamza);
 		
-		chkBeforeLastDblOrVowel = new JCheckBox("قبل آخره مضعف أو حرف علة");
+		chkBeforeLastDblOrVowel = new JCheckBox("عينه مضعفة أو معتلة");
 		chkBeforeLastDblOrVowel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		chkBeforeLastDblOrVowel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -335,7 +350,7 @@ public class MainFrame extends JFrame {
 				}
 			}
 		});
-		chkPassive.setBounds(219, 145, 97, 23);
+		chkPassive.setBounds(161, 145, 155, 23);
 		panel.add(chkPassive);
 		
 		
@@ -348,7 +363,7 @@ public class MainFrame extends JFrame {
 					stem.setTransitivity(trans.isSelected()?1:0);
 			}
 		});
-		chkTransitive.setBounds(219, 119, 97, 23);
+		chkTransitive.setBounds(161, 119, 155, 23);
 		panel.add(chkTransitive);
 		
 		JLabel label_2 = new JLabel("تصنيف فرعي");
@@ -359,24 +374,39 @@ public class MainFrame extends JFrame {
 		ListCellRenderer renderer = new DefaultListCellRenderer();
 		( (JLabel) renderer ).setHorizontalAlignment( SwingConstants.RIGHT );
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		comboBox.setRenderer(renderer);
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"\u0645\u0636\u0627\u0631\u0639"}));		
-		comboBox.setBounds(169, 95, 72, 20);
-		panel.add(comboBox);
+		comboBoxSubClass = new JComboBox();
+		comboBoxSubClass.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		comboBoxSubClass.setRenderer(renderer);
+		comboBoxSubClass.setModel(new DefaultComboBoxModel(new String[] {"ماضي", "مضارع"}));		
+		comboBoxSubClass.setBounds(169, 95, 72, 20);
+		comboBoxSubClass.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				JComboBox cmb = (JComboBox) arg0.getSource();
+				if(stem != null) {
+					switch(cmb.getSelectedIndex()) {
+						case 0:	stem.setStemSubClass("perfect");
+						break;
+						case 1: stem.setStemSubClass("imperfect");
+						break;
+					}
+				}
+			}
+		});
+		panel.add(comboBoxSubClass);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setRenderer(renderer);
-		comboBox_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"\u0641\u0639\u0644"}));
-		comboBox_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		comboBox_1.setBounds(169, 67, 72, 20);
-		panel.add(comboBox_1);
+		comboBoxClass = new JComboBox();
+		comboBoxClass.setRenderer(renderer);
+		comboBoxClass.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		comboBoxClass.setModel(new DefaultComboBoxModel(new String[] {"\u0641\u0639\u0644"}));
+		comboBoxClass.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		comboBoxClass.setBounds(169, 67, 72, 20);
+		panel.add(comboBoxClass);
 		
 		JLabel label_3 = new JLabel("نوع الكلمة");
 		label_3.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_3.setBounds(258, 70, 58, 14);
+		label_3.setBounds(251, 70, 65, 14);
 		panel.add(label_3);
 		
 		JLabel label_4 = new JLabel("ملاحظة: يجب أن تكون الكلمة مجردة من الزوائد ومشكلة.");
@@ -401,10 +431,12 @@ public class MainFrame extends JFrame {
 		});
 		txtStem.addFocusListener(new FocusAdapter() {
 			@Override
+			// here we update the interface with values returned from the morphological guessers 
 			public void focusLost(FocusEvent arg0) {
 				final JTextField text = (JTextField)arg0.getSource();
 				if(!text.getText().isEmpty()){
 					stem = new VocStem(text.getText());
+					comboBoxSubClass.setSelectedItem(stem.getStemSubClass());
 					chkBeforeLastDblOrVowel.setSelected(stem.isBeforeLastDblOrVowel());
 					chkBeforeLastHamza.setSelected(stem.isBeforeLastHamza());
 					chkPassive.setSelected(stem.isPassive());
@@ -423,7 +455,18 @@ public class MainFrame extends JFrame {
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("تلقائي", null, panel_1, null);
 		
-/*
+		JButton btnEnglish = new JButton("English");
+		btnEnglish.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				flipInterface();
+				//switchLanguage();
+			}
+
+		});
+		btnEnglish.setBounds(145, 2, 89, 23);
+		contentPane.add(btnEnglish);
+				
+		/*
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("اختر ملفًا نصيًا :");
@@ -527,6 +570,84 @@ public class MainFrame extends JFrame {
 		btnStart.setBounds(21, 260, 89, 23);
 		panel_1.add(btnStart);
 */	
+	}
+	public void flipInterface() {
+		Component[] compArr = panel.getComponents();
+		for (int i=0; i<compArr.length; i++) {
+			Component comp = compArr[i];
+			comp.setLocation(panel.getWidth() - comp.getWidth() - comp.getX(), comp.getY());
+			if(comp.getClass().getSimpleName().equals("JLabel")) {
+				try {
+					JLabel jullo = (JLabel) comp;	
+					System.out.println("ID "+i+" "+jullo.getText());
+					flipHorizontalAlignment(jullo);
+				} catch(ClassCastException e) {
+					System.out.println("ID "+i+" is not a JLabel");
+				}				
+			} else if (comp.getClass().getSimpleName().equals("JCheckBox")) {
+				try {
+					AbstractButton jboxo = (AbstractButton) comp;	
+					System.out.println("ID "+i+" "+jboxo.getText());
+					flipHorizontalAlignment(jboxo);
+					flipComponentOrientation(jboxo);
+				} catch(ClassCastException e) {
+					System.out.println("ID "+i+" is not a JCheckBox");
+				}				
+			} else if (comp.getClass().getSimpleName().equals("JComboBox")) {
+				try {
+					JComboBox jboxo = (JComboBox) comp;	
+					System.out.println("ID "+i+" "+jboxo.getName());
+					flipComponentOrientation(jboxo);
+				} catch(ClassCastException e) {
+					System.out.println("ID "+i+" is not a JComboBox");
+				}				
+			}
+		}
+	}
+	private void flipComponentOrientation(JComboBox jboxo) {
+		if(jboxo.getComponentOrientation()==ComponentOrientation.RIGHT_TO_LEFT)
+			jboxo.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		else if(jboxo.getComponentOrientation()==ComponentOrientation.LEFT_TO_RIGHT)
+			jboxo.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+	}
+
+	private void flipComponentOrientation(AbstractButton jboxo) {
+		if(jboxo.getComponentOrientation()==ComponentOrientation.RIGHT_TO_LEFT)
+			jboxo.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		else if(jboxo.getComponentOrientation()==ComponentOrientation.LEFT_TO_RIGHT)
+			jboxo.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+	}
+
+	private void flipHorizontalAlignment(JLabel jullo) {
+		if(jullo.getHorizontalAlignment()==SwingConstants.RIGHT)
+			jullo.setHorizontalAlignment(SwingConstants.LEFT);
+		else if(jullo.getHorizontalAlignment()==SwingConstants.LEFT)
+			jullo.setHorizontalAlignment(SwingConstants.RIGHT);
+	}
+	private void flipHorizontalAlignment(AbstractButton jullo) {
+		if(jullo.getHorizontalAlignment()==SwingConstants.RIGHT)
+			jullo.setHorizontalAlignment(SwingConstants.LEFT);
+		else if(jullo.getHorizontalAlignment()==SwingConstants.LEFT)
+			jullo.setHorizontalAlignment(SwingConstants.RIGHT);
+	}
+	private int currentLang = 0; 
+	public void switchLanguage() {
+		Component[] compArr = panel.getComponents();
+		for (int i=0; i<compArr.length; i++) {
+			try {
+				JButton jumbo = (JButton) compArr[i];	
+				System.out.println(compArr[i].getName()+" "+i+" "+jumbo.getText());
+				jumbo.setText(getString(i,++currentLang%NUM_OF_LANGS));				
+			} catch(ClassCastException e) {
+				System.out.println(compArr[i].getName()+" "+i+" is not a JButton");
+				continue;
+			}
+		}
+	}
+
+	private String getString(int compID, int langID) {
+		String s="star";
+		return s;
 	}
 	
 }

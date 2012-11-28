@@ -71,7 +71,6 @@ public class VocStem {
 	
 	public VocStem(String stem) {
 		this.stem = stem;
-		System.out.println(isDiac('َ'));
 		estimStemClass();
 		estimStemSubClass();
 		estimIsBeforeLastDblOrVowel();
