@@ -1,14 +1,14 @@
 
-Introduction
-============
+BuckTagger
+==========
 
-BuckTagger: A rule-based classifier of Arabic words into the 
+BuckTagger is a rule-based classifier of Arabic words into the 
 morphological categories of Buckwalter.
-The goal of this project is to simplify--or even automate--data entry 
+The goal of this project is to simplify, and to some extent automate, data entry 
 into the lexicon of Buckwalter's Arabic Morphological Analyzer (BAMA).
 
 General Notes
-=============
+-------------
 
 The main inquiry function is called "getPrimaryTag".
 It might return more than one tag. if so, only one should be chosen to 
@@ -29,7 +29,7 @@ be found in the excel file TagsClassified.xlsx in comments.
 
 
 Terminology
-===========
+-----------
 
 The morphological categories that were first introduced in the lexicon 
 of BAMA 1.0 are called tags.
@@ -41,7 +41,7 @@ that is under a primary tag. Under each primary tag, fall secondary
 tags, either one, multiple or none at all.
 
 Sample Output
-=============
+-------------
 
 In case you can't come up with suitable input, we have assembled this 
 list which covers most cases. Try them for input:
@@ -65,7 +65,7 @@ follows:
 	]
 
 Files
-=====
+-----
 
 - TagsComments.xlsx :
 	In this file, a thorough study was made on each tag in the 
@@ -113,7 +113,7 @@ Files
 
 
 How to Compile
-==============
+--------------
 
 To compile from source, you first need to setup the environment. To do 
 so, follow these steps:
@@ -149,7 +149,7 @@ path. The eclispe plugin,is at that same download page, the file named
 plugin are available.
 	
 How to Use
-==========
+----------
 
 In the input text field, enter a word. Your input must be:
 - an Arabic word of course
@@ -169,7 +169,7 @@ The results should look more or less like the sample output provided
 in this readme under "Sample Output".
 
 How it Works
-============
+------------
 
 When a word is entered, as soon as focus leaves the input text field, 
 special methods are called to estimate values of variables of the 
@@ -184,7 +184,7 @@ rules' actions give the appropriate tags, and the corresponding
 inflected/modified forms of the word if any.
 
 Future Work
-===========
+-----------
 
 Primary-tag and secondary-tag decision tables were done only for IV 
 types. The rest shall be completed. The comments in the excel files 
@@ -202,7 +202,7 @@ need for a human agent.
 All these suggestions are marked in TODOs in the code.
 
 Developers
-==========
+----------
 
 This project was designed and implemented by:
 	- Omar Duhaiby	(3omarz@gmail.com)
