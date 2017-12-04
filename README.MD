@@ -122,7 +122,7 @@ so, follow these steps:
 http://www.eclipse.org/downloads/. 
 3- Eclipse does not need installation. It's portable. Just unzip it 
 anywhere, and run eclipse.exe.
-4- In Eclips, go to "Help" -> "Install New Software" -> "Add"
+4- In Eclipse, go to "Help" -> "Install New Software" -> "Add"
 5- paste the url: "http://www.jboss.org/drools/downloads.html"
 6- Select the added link from the dropdown list.
 7- Check "Drools and jBPM".
@@ -141,7 +141,7 @@ specific settings (the check box) -> selecte the runtime you just added.
 If you stopped at step 6, i.e., you can't download from the update 
 site, and you can't configure eclipse's internet access, then do it 
 manually. Download the update site from the same link to your PC, then 
-give Eclipse its path on your PC instead of the url. Then u can 
+give Eclipse its path on your PC instead of the url. Then you can 
 download the runtime from http://www.jboss.org/drools/downloads.html 
 (the first file named "Drools") and add it to the project's class 
 path. The eclispe plugin,is at that same download page, the file named 
@@ -166,7 +166,7 @@ the values of the checkboxes should change according to what the
 program has automatically estimated. Revise the values, correct 
 mistakes, and then hit Enter again or click the button.
 The results should look more or less like the sample output provided 
-in this readme udner "Sample Output".
+in this readme under "Sample Output".
 
 How it Works
 ============
