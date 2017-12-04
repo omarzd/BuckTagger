@@ -45,13 +45,13 @@ Sample Output
 
 In case you can't come up with suitable input, we have assembled this 
 list which covers most cases. Try them for input:
-	- يَمضِي
-	- يَرعى
-	- يَستعمل
-	- يُؤذن
-	- يَخشى
-	- يُؤذِن
-	- يُؤذَن
+- يَمضِي
+- يَرعى
+- يَستعمل
+- يُؤذن
+- يَخشى
+- يُؤذِن
+- يُؤذَن
 
 For example if we take the verb يَخشَى as input, the output will be as 
 follows:
@@ -205,5 +205,5 @@ Developers
 ----------
 
 This project was designed and implemented by:
-	- Omar Duhaiby	(3omarz@gmail.com)
-	- Ahmed Aman	(a7med505@gmail.com)
+- Omar Duhaiby	(3omarz@gmail.com)
+- Ahmed Aman	(a7med505@gmail.com)
