@@ -1,110 +1,14 @@
-﻿/======================================\
-|__________ ,============. ___________ |
-|++++++++++ | DISCLAIMER | +++++++++++ |
-|           '============'             |
-\======================================/
 
-  Copyright 2012 Omar Alzuhaibi and Ahmed Aman
- 
-  BuckTagger is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  any later version.
-  
-  BuckTagger is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-  
-  You should have received a copy of the GNU General Public License
-  along with BuckTagger.  If not, see <http://www.gnu.org/licenses/>.
-  
-    
-+--------------------------------------------+
-|  BUCKWALTER ARABIC MORPHOLOGICAL ANALYZER  |
-+--------------------------------------------+
-Portions (c) 2002 QAMUS LLC (www.qamus.org), 
-(c) 2002 Trustees of the University of Pennsylvania 
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation version 2.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details (../gpl.txt).
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-
-You can contact LDC by sending electronic mail to: ldc@ldc.upenn.edu
-or by writing to:
-                Linguistic Data Consortium
-                3600 Market Street
-                Suite 810
-                Philadelphia, PA, 19104-2653, USA.
-  
-+---------------------------+
-|  Drools Copyright Notice  |
-+---------------------------+
-Copyright 2001-2005 (C) The Werken Company. All Rights Reserved.
- 
-Redistribution and use of this software and associated documentation
-("Software"), with or without modification, are permitted provided
-that the following conditions are met:
-
- 1. Redistributions of source code must retain copyright
-    statements and notices.  Redistributions must also contain a
-    copy of this document.
- 
- 2. Redistributions in binary form must reproduce the
-    above copyright notice, this list of conditions and the
-    following disclaimer in the documentation and/or other
-    materials provided with the distribution.
- 
- 3. The name "drools" must not be used to endorse or promote
-    products derived from this Software without prior written
-    permission of The Werken Company.  For written permission,
-    please contact bob@werken.com.
- 
- 4. Products derived from this Software may not be called "drools"
-    nor may "drools" appear in their names without prior written
-    permission of The Werken Company. "drools" is a trademark of 
-    The Werken Company.
- 
- 5. Due credit should be given to The Werken Company.
-    (http://werken.com/)
- 
-THIS SOFTWARE IS PROVIDED BY THE WERKEN COMPANY AND CONTRIBUTORS
-``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT
-NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL
-THE WERKEN COMPANY OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
-OF THE POSSIBILITY OF SUCH DAMAGE.
-  
-
-================================================================================
-/==============\
-| Introduction |
-\==============/
+Introduction
+============
 
 BuckTagger: A rule-based classifier of Arabic words into the 
 morphological categories of Buckwalter.
 The goal of this project is to simplify--or even automate--data entry 
 into the lexicon of Buckwalter's Arabic Morphological Analyzer (BAMA).
 
-================================================================================
-/===============\
-| General Notes |
-\===============/
+General Notes
+=============
 
 The main inquiry function is called "getPrimaryTag".
 It might return more than one tag. if so, only one should be chosen to 
@@ -124,10 +28,8 @@ be found in the excel file TagsClassified.xlsx in comments.
 	CV: 36    Stems
 
 
-================================================================================
-/=============\
-| Terminology |
-\=============/
+Terminology
+===========
 
 The morphological categories that were first introduced in the lexicon 
 of BAMA 1.0 are called tags.
@@ -138,10 +40,8 @@ form, i.e., without modification.
 that is under a primary tag. Under each primary tag, fall secondary 
 tags, either one, multiple or none at all.
 
-================================================================================
-/===============\
-| Sample Output |
-\===============/
+Sample Output
+=============
 
 In case you can't come up with suitable input, we have assembled this 
 list which covers most cases. Try them for input:
@@ -164,10 +64,8 @@ follows:
 	, IV_h:	 خشا
 	]
 
-================================================================================
-/=============\
-|    Files    |
-\=============/
+Files
+=====
 
 - TagsComments.xlsx :
 	In this file, a thorough study was made on each tag in the 
@@ -214,10 +112,8 @@ follows:
 	BuckTagger\src\main\rules\BuckTagRules.xls
 
 
-================================================================================
-/================\
-| How to Compile |
-\================/
+How to Compile
+==============
 
 To compile from source, you first need to setup the environment. To do 
 so, follow these steps:
@@ -252,10 +148,8 @@ path. The eclispe plugin,is at that same download page, the file named
 "Drools and jBPM tools". Online tutorials for installing the eclipse 
 plugin are available.
 	
-================================================================================
-/=============\
-| How to Use  |
-\=============/
+How to Use
+==========
 
 In the input text field, enter a word. Your input must be:
 - an Arabic word of course
@@ -274,10 +168,8 @@ mistakes, and then hit Enter again or click the button.
 The results should look more or less like the sample output provided 
 in this readme udner "Sample Output".
 
-================================================================================
-/==============\
-| How it Works |
-\==============/
+How it Works
+============
 
 When a word is entered, as soon as focus leaves the input text field, 
 special methods are called to estimate values of variables of the 
@@ -291,10 +183,8 @@ conditions directly relate to the variables of the VocStem object. The
 rules' actions give the appropriate tags, and the corresponding 
 inflected/modified forms of the word if any.
 
-================================================================================
-/=============\
-| Future Work |
-\=============/
+Future Work
+===========
 
 Primary-tag and secondary-tag decision tables were done only for IV 
 types. The rest shall be completed. The comments in the excel files 
@@ -311,11 +201,9 @@ Then the advanced algorithms of NLP should be introduced to reduce the
 need for a human agent.
 All these suggestions are marked in TODOs in the code.
 
-================================================================================
-/=============\
-| Developers  |
-\=============/
+Developers
+==========
 
 This project was designed and implemented by:
-	- Omar AlZuhaibi	(3omarz@gmail.com)
+	- Omar Duhaiby	(3omarz@gmail.com)
 	- Ahmed Aman	(a7med505@gmail.com)
