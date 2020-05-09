@@ -80,8 +80,8 @@ Files
 - [`TagsClassified.xlsx`](TagsClassified.xlsx) :
 	In this file, we extended our study of the Buckwalter tags 
 	to be able to divide the description of each tag into an 
-	orderly set of attributes, found in sheets "IV Class" and 
-	"PV Class". Only IV (Imperfect Verbs) tags and PV (Perfect 
+	orderly set of attributes, found in sheets `IV Class` and 
+	`PV Class`. Only IV (Imperfect Verbs) tags and PV (Perfect 
 	Verb) tags were considered for this process since they are 
 	the trickiest, the most rewarding, and they make more than 
 	60% of the total tags.
@@ -91,16 +91,16 @@ Files
 	to easily translate into a low-level decision table. 
 	Moreover, they did not arrange families of tags together.
 	
-	Thus, the sheet "IV Class^2" was created. In it, the tags 
+	Thus, the sheet `IV Class^2` was created. In it, the tags 
 	were divided into primary and seconary tags. Each family 
 	of tags resides under one primary tag, while the rest of 
 	that family were secondary tags, i.e., children of the 
 	primary tag. More about the classification of tags into 
 	primary and secondary can be found in the excel file 
-	TagsClassified.xlsx (hint: look for hidden comments in 
+	[`TagsClassified.xlsx`](TagsClassified.xlsx) (hint: look for hidden comments in 
 	cells).
 	
-	"IV Class^2" was then traslated into the lower-level 
+	`IV Class^2` was then traslated into the lower-level 
 	desicion table found in [`BuckTagsRules.xls`](BuckTagger/src/main/rules/BuckTagsRules.xls). 
 	
 - [`BuckTagsRules.xls`](BuckTagger/src/main/rules/BuckTagsRules.xls) :
