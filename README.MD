@@ -1,3 +1,4 @@
+See [LICENSE](LICENSE) for licensing information.
 
 BuckTagger
 ==========
@@ -6,6 +7,16 @@ BuckTagger is a rule-based classifier of Arabic words into the
 morphological categories of Buckwalter.
 The goal of this project is to simplify, and to some extent automate, data entry 
 into the lexicon of Buckwalter's Arabic Morphological Analyzer (BAMA).
+
+Technical Report
+----------------
+
+A detailed technical report is [available](BuckTaggerTechnicalReportArabic.pdf) in Arabic explaining the work, its logic and design steps from theory to implementation.
+
+Acknowledgement
+---------------
+
+Credit is due to my friend and colleague Ahmed Aman who was a big support during the long and challenging development of this project.
 
 General Notes
 -------------
@@ -201,9 +212,7 @@ Then the advanced algorithms of NLP should be introduced to reduce the
 need for a human agent.
 All these suggestions are marked in TODOs in the code.
 
-Developers
-----------
+Contact
+-------
 
-This project was designed and implemented by:
-- Omar Duhaiby	(3omarz@gmail.com)
-- Ahmed Aman	(a7med505@gmail.com)
+For any issues or suggestions, please [create a new issue](http://github.com/omarzd/BuckTagger/issues/new).
