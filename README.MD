@@ -12,6 +12,26 @@ morphological categories of Buckwalter.
 The goal of this project is to simplify, and to some extent automate, data entry
 into the lexicon of Buckwalter's Arabic Morphological Analyzer (BAMA).
 
+## Quick Start - One-Click Launch
+
+**Linux/Mac:**
+```bash
+./launch.sh
+```
+
+**Windows:**
+```bash
+launch.bat
+```
+
+**Or manually:**
+```bash
+cd buck-tagger-modern
+npm install && npm start
+```
+
+See [QUICK_START.md](QUICK_START.md) for detailed instructions.
+
 ## Versions
 
 - **[Modern Web Version](buck-tagger-modern/)** (2025) - Embeddable TypeScript/Web Component version
