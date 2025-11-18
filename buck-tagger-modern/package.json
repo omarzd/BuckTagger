@@ -1,0 +1,38 @@
+{
+  "name": "buck-tagger",
+  "version": "2.0.0",
+  "description": "Modern Arabic morphological analyzer - Buckwalter tagger as an embeddable web component",
+  "type": "module",
+  "main": "./dist/buck-tagger.umd.js",
+  "module": "./dist/buck-tagger.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/buck-tagger.es.js",
+      "require": "./dist/buck-tagger.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "echo \"Tests coming soon\""
+  },
+  "keywords": [
+    "arabic",
+    "nlp",
+    "morphology",
+    "buckwalter",
+    "web-component",
+    "custom-element",
+    "morphological-analyzer"
+  ],
+  "author": "Omar Alzuhaibi (original), Modernized 2025",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vite": "^5.0.0"
+  }
+}

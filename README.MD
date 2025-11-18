@@ -3,10 +3,19 @@ See [LICENSE](LICENSE) for licensing information.
 BuckTagger
 ==========
 
-BuckTagger is a rule-based classifier of Arabic words into the 
+**Modern Web Version Available!** Check out the [modernized web component version](buck-tagger-modern/) that can be embedded in any webpage.
+
+---
+
+BuckTagger is a rule-based classifier of Arabic words into the
 morphological categories of Buckwalter.
-The goal of this project is to simplify, and to some extent automate, data entry 
+The goal of this project is to simplify, and to some extent automate, data entry
 into the lexicon of Buckwalter's Arabic Morphological Analyzer (BAMA).
+
+## Versions
+
+- **[Modern Web Version](buck-tagger-modern/)** (2025) - Embeddable TypeScript/Web Component version
+- **Original Java Version** (2012) - Desktop application with Drools engine (see below)
 
 Technical Report
 ----------------
