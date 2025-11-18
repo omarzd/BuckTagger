@@ -133,7 +133,10 @@ export class BuckTaggerElement extends HTMLElement {
     this.inputField.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        this.submitButton.click();
+        // Ensure stem is created before analysis
+        this.onInputBlur();
+        // Small delay to ensure blur processing completes
+        setTimeout(() => this.analyze(), 10);
       }
     });
 
@@ -207,6 +210,9 @@ export class BuckTaggerElement extends HTMLElement {
     }
 
     const inputWord = this.inputField.value.trim();
+
+    // Clear previous secondary tags before new analysis
+    this.stem.clearSecondaryTags();
 
     // Perform analysis
     analyze(this.stem);
