@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الملاحظات العربية - Arabic Morphological Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Cairo', 'Amiri', sans-serif;
+      background: #f8fafc;
+      line-height: 1.8;
+      color: #1e293b;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-family: 'Amiri', serif;
+    }
+
+    .header p {
+      font-size: 1.125rem;
+      opacity: 0.95;
+    }
+
+    .nav {
+      background: white;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav a {
+      color: #667eea;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 600;
+    }
+
+    .nav a:hover {
+      color: #764ba2;
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .section {
+      background: white;
+      border-radius: 1rem;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      color: #667eea;
+      margin-bottom: 1.5rem;
+      font-family: 'Amiri', serif;
+      border-right: 4px solid #667eea;
+      padding-right: 1rem;
+    }
+
+    .section h3 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin: 2rem 0 1rem;
+      font-family: 'Amiri', serif;
+    }
+
+    .section h4 {
+      font-size: 1.25rem;
+      color: #475569;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    .highlight {
+      background: #eff6ff;
+      border-right: 3px solid #3b82f6;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .tag-box {
+      background: #f1f5f9;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      margin: 1rem 0;
+      border-right: 3px solid #10b981;
+    }
+
+    .tag-name {
+      font-family: 'Courier New', monospace;
+      background: #1e293b;
+      color: #10b981;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-weight: bold;
+    }
+
+    .example {
+      background: #fef3c7;
+      border-right: 3px solid #f59e0b;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .example-word {
+      font-family: 'Amiri', serif;
+      font-size: 1.5rem;
+      color: #92400e;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: right;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #1e293b;
+      font-weight: 700;
+    }
+
+    tr:hover {
+      background: #f8fafc;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+
+    .toc {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 0.75rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .toc h3 {
+      margin-top: 0;
+      color: #667eea;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding-right: 0;
+    }
+
+    .toc li {
+      margin: 0.5rem 0;
+    }
+
+    .toc a {
+      color: #475569;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .toc a:hover {
+      color: #667eea;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      color: #64748b;
+      margin-top: 3rem;
+    }
+
+    code {
+      background: #f1f5f9;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-family: 'Courier New', monospace;
+      color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>الملاحظات العربية التفصيلية</h1>
+    <p>دليل شامل للتصنيف الصرفي العربي حسب نظام بكوالتر</p>
+    <p>Comprehensive Arabic Morphological Classification Guide - Buckwalter System</p>
+  </div>
+
+  <div class="nav">
+    <a href="index.html">← العودة للرئيسية / Back to Home</a>
+    <a href="#intro">مقدمة</a>
+    <a href="#terminology">المصطلحات</a>
+    <a href="#features">الميزات الصرفية</a>
+    <a href="#primary-tags">الوسوم الرئيسية</a>
+    <a href="#secondary-tags">الوسوم الفرعية</a>
+    <a href="#examples">أمثلة</a>
+  </div>
+
+  <div class="container">
+    <!-- Table of Contents -->
+    <div class="toc">
+      <h3>فهرس المحتويات / Table of Contents</h3>
+      <ul>
+        <li><a href="#intro">نبذة عن المشروع</a></li>
+        <li><a href="#stats">إحصائيات المعجم</a></li>
+        <li><a href="#terminology">المصطلحات الأساسية</a></li>
+        <li><a href="#features">الميزات الصرفية للأفعال المضارعة</a></li>
+        <li><a href="#primary-tags">الوسوم الرئيسية (Primary Tags)</a></li>
+        <li><a href="#secondary-tags">الوسوم الفرعية (Secondary Tags)</a></li>
+        <li><a href="#examples">أمثلة تفصيلية</a></li>
+        <li><a href="#rules">قواعد التصنيف</a></li>
+        <li><a href="#future">الأعمال المستقبلية</a></li>
+      </ul>
+    </div>
+
+    <!-- Introduction -->
+    <div class="section" id="intro">
+      <h2>نبذة عن المشروع</h2>
+      <p>
+        <strong>واسم (BuckTagger)</strong> هو مصنف قائم على القواعد للكلمات العربية إلى فئات بكوالتر الصرفية.
+        الهدف من هذا المشروع هو تبسيط وأتمتة إدخال البيانات في معجم محلل بكوالتر الصرفي العربي (BAMA).
+      </p>
+      <p>
+        تم تطوير هذا المشروع الأصلي بواسطة <strong>عمر الزهيبي</strong> و <strong>أحمد أمان</strong> عام 2012،
+        ويعتمد على نظام بكوالتر للتحليل الصرفي العربي الذي يعد من أشهر الأنظمة في هذا المجال.
+      </p>
+
+      <div class="highlight">
+        <h4>أهمية المشروع</h4>
+        <p>
+          يساعد هذا المشروع الباحثين واللغويين في:
+        </p>
+        <ul>
+          <li>التصنيف الآلي للكلمات العربية حسب أوزانها الصرفية</li>
+          <li>تحديد الوسوم الرئيسية والفرعية للأفعال المضارعة</li>
+          <li>توليد الأشكال المصرفة المختلفة للكلمة الواحدة</li>
+          <li>تسريع عملية إدخال البيانات في المعاجم الرقمية</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="section" id="stats">
+      <h2>إحصائيات المعجم الأصلي</h2>
+      <p>عدد الجذور في معجم بكوالتر الأصلي حسب نوع الكلمة:</p>
+
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-number">49,213</div>
+          <div class="stat-label">أسماء (N - Nouns)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">17,367</div>
+          <div class="stat-label">أفعال ماضية (PV - Perfect Verbs)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">14,387</div>
+          <div class="stat-label">أفعال مضارعة (IV - Imperfect Verbs)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">1,147</div>
+          <div class="stat-label">أدوات (FW - Function Words)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">36</div>
+          <div class="stat-label">أفعال أمر (CV - Command Verbs)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terminology -->
+    <div class="section" id="terminology">
+      <h2>المصطلحات الأساسية</h2>
+
+      <h3>الوسوم (Tags)</h3>
+      <p>
+        الفئات الصرفية التي قدمت أول مرة في معجم BAMA 1.0 تسمى <strong>وسوم</strong>.
+        هذه الوسوم تمثل التصنيفات المختلفة التي يمكن أن تقع فيها الكلمة العربية.
+      </p>
+
+      <h3>أنواع الوسوم</h3>
+
+      <div class="tag-box">
+        <h4>الوسوم الرئيسية (Primary Tags)</h4>
+        <p>
+          تمثل الكلمات في صورتها الأصلية (بدون تعديل). هي الوسوم الأساسية التي تصنف الكلمة حسب وزنها الصرفي الرئيسي.
+        </p>
+        <p><strong>مثال:</strong> <span class="tag-name">IV_0</span> للفعل المضارع الأساسي</p>
+      </div>
+
+      <div class="tag-box">
+        <h4>الوسوم الفرعية (Secondary Tags)</h4>
+        <p>
+          تمثل الأشكال المعدلة من الكلمة. تقع تحت وسم رئيسي واحد وتعبر عن التصريفات المختلفة أو الحالات الإعرابية المختلفة.
+        </p>
+        <p><strong>مثال:</strong> <span class="tag-name">IV_Ann</span>, <span class="tag-name">IV_0hwnyn</span>, <span class="tag-name">IV_h</span></p>
+        <p>قد يكون للوسم الرئيسي وسم فرعي واحد أو عدة وسوم أو لا شيء على الإطلاق.</p>
+      </div>
+
+      <h3>العلاقة بين الوسوم</h3>
+      <p>
+        دور <code>getPrimaryTag</code> إلى <code>getSecondaryTags</code> يشبه العلاقة بين التحليل الصرفي والتوليد الصرفي.
+        الوسم الرئيسي يحدد الشكل الأساسي، والوسوم الفرعية تولد الأشكال المشتقة منه.
+      </p>
+    </div>
+
+    <!-- Morphological Features -->
+    <div class="section" id="features">
+      <h2>الميزات الصرفية للأفعال المضارعة</h2>
+
+      <h3>1. التعدية (Transitivity)</h3>
+      <div class="highlight">
+        <h4>متعدي (Transitive)</h4>
+        <p>الفعل يحتاج إلى مفعول به واحد أو أكثر لإتمام المعنى.</p>
+        <p><strong>مثال:</strong> <span class="example-word">يَكتُبُ</span> - يحتاج إلى مفعول به (يكتب الدرسَ)</p>
+      </div>
+
+      <div class="highlight">
+        <h4>لازم (Intransitive)</h4>
+        <p>الفعل لا يحتاج إلى مفعول به، يكتفي بالفاعل.</p>
+        <p><strong>مثال:</strong> <span class="example-word">يَنامُ</span> - لا يحتاج لمفعول به</p>
+      </div>
+
+      <div class="highlight">
+        <h4>متعدي لمفعولين</h4>
+        <p>بعض الأفعال تحتاج لمفعولين لإتمام المعنى.</p>
+        <p><strong>مثال:</strong> <span class="example-word">يُعطي</span> - يعطي زيدٌ عمرًا كتابًا</p>
+      </div>
+
+      <h3>2. البناء للمجهول (Passive Voice)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>البناء للمعلوم</th>
+            <th>البناء للمجهول</th>
+            <th>الملاحظات</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="example-word">يَكتُبُ</span></td>
+            <td><span class="example-word">يُكتَبُ</span></td>
+            <td>الفاعل معروف في الأول، محذوف في الثاني</td>
+          </tr>
+          <tr>
+            <td><span class="example-word">يَقرَأُ</span></td>
+            <td><span class="example-word">يُقرَأُ</span></td>
+            <td>المفعول به يحل محل الفاعل</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="highlight">
+        <h4>شروط البناء للمجهول في المضارع:</h4>
+        <ul>
+          <li>حرف المضارعة عليه <strong>ضمة</strong> (يُ بدلاً من يَ)</li>
+          <li>الحرف قبل الأخير عليه <strong>فتحة</strong> أو هو <strong>ألف</strong></li>
+        </ul>
+      </div>
+
+      <h3>3. حرف المضارعة (Imperfective Letter)</h3>
+      <p>حروف المضارعة الأربعة: <strong>أ، ن، ي، ت</strong> (أنيت)</p>
+
+      <div class="tag-box">
+        <h4>حرف المضارعة مفتوح (isImpYa)</h4>
+        <p>يعني أن حرف المضارعة عليه <strong>فتحة</strong></p>
+        <table>
+          <tr>
+            <td><span class="example-word">يَكتُبُ</span></td>
+            <td>الياء مفتوحة</td>
+          </tr>
+          <tr>
+            <td><span class="example-word">يَقرَأُ</span></td>
+            <td>الياء مفتوحة</td>
+          </tr>
+          <tr>
+            <td><span class="example-word">يُكتَبُ</span></td>
+            <td>الياء مضمومة (مبني للمجهول)</td>
+          </tr>
+        </table>
+      </div>
+
+      <h3>4. الحروف المعتلة والمضعفة</h3>
+
+      <h4>عينه مضعفة أو معتلة (isBeforeLastDblOrVowel)</h4>
+      <div class="example">
+        <p><strong>مضعف:</strong> الحرف قبل الأخير (العين) مكرر</p>
+        <p class="example-word">يَمُدُّ ← م د د (العين مضعفة)</p>
+        <p class="example-word">يَرُدُّ ← ر د د (العين مضعفة)</p>
+      </div>
+
+      <div class="example">
+        <p><strong>معتل:</strong> الحرف قبل الأخير حرف علة (ا، و، ي)</p>
+        <p class="example-word">يَقولُ ← ق و ل (الواو حرف علة)</p>
+        <p class="example-word">يَبيعُ ← ب ي ع (الياء حرف علة)</p>
+        <p class="example-word">يَقالُ ← ق و ل (أصلها قول، الواو قلبت ألف)</p>
+      </div>
+
+      <h4>عينه همزة (isBeforeLastHamza)</h4>
+      <div class="example">
+        <p>الحرف قبل الأخير همزة بأي شكل من أشكالها (ء، أ، إ، آ، ؤ، ئ)</p>
+        <p class="example-word">يَسأَلُ ← س أ ل</p>
+        <p class="example-word">يَرأَى ← ر أ ي</p>
+      </div>
+
+      <h4>فاؤه همزة (isFirstHamza)</h4>
+      <div class="example">
+        <p>أول حرف من الجذر همزة</p>
+        <p class="example-word">يَأخُذُ ← أ خ ذ</p>
+        <p class="example-word">يَأكُلُ ← أ ك ل</p>
+        <p class="example-word">يُؤمِنُ ← أ م ن</p>
+      </div>
+    </div>
+
+    <!-- Primary Tags -->
+    <div class="section" id="primary-tags">
+      <h2>الوسوم الرئيسية للأفعال المضارعة</h2>
+
+      <div class="tag-box">
+        <h3><span class="tag-name">IV_0</span> - الفعل المضارع الأساسي</h3>
+        <p><strong>الوصف:</strong> الفعل المضارع الأكثر شيوعًا، الصحيح السالم</p>
+
+        <h4>الشروط:</h4>
+        <ul>
+          <li>فعل مضارع ✓</li>
+          <li>ليس مبنيًا للمجهول ✗</li>
+          <li>ليس قبل آخره حرف مضعف أو معتل ✗</li>
+          <li>ليس قبل آخره همزة ✗</li>
+          <li>ليس أوله همزة ✗</li>
+        </ul>
+
+        <h4>أمثلة:</h4>
+        <div class="example">
+          <p class="example-word">يَكتُبُ</p>
+          <p>الجذر: ك ت ب - فعل صحيح سالم</p>
+        </div>
+        <div class="example">
+          <p class="example-word">يَقرَأُ</p>
+          <p>الجذر: ق ر أ - الهمزة في الآخر لا تؤثر على IV_0</p>
+        </div>
+      </div>
+
+      <div class="tag-box">
+        <h3><span class="tag-name">IV_Pass</span> - الفعل المضارع المبني للمجهول</h3>
+        <p><strong>الوصف:</strong> المضارع المبني للمجهول</p>
+
+        <h4>الشروط:</h4>
+        <ul>
+          <li>فعل مضارع ✓</li>
+          <li>مبني للمجهول ✓</li>
+          <li>حرف المضارعة مضموم</li>
+          <li>قبل الأخير مفتوح أو ألف</li>
+        </ul>
+
+        <h4>أمثلة:</h4>
+        <div class="example">
+          <p class="example-word">يُكتَبُ</p>
+          <p>من: كَتَبَ - يَكتُبُ (معلوم) ← يُكتَبُ (مجهول)</p>
+        </div>
+        <div class="example">
+          <p class="example-word">يُقرَأُ</p>
+          <p>من: قَرَأَ - يَقرَأُ (معلوم) ← يُقرَأُ (مجهول)</p>
+        </div>
+      </div>
+
+      <div class="tag-box">
+        <h3>وسوم الأفعال المعتلة والمهموزة</h3>
+        <p>تشترك هذه الأفعال في الوسم الرئيسي <span class="tag-name">IV_0</span> ولكنها تختلف في الميزات:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>النوع</th>
+              <th>الوسم</th>
+              <th>مثال</th>
+              <th>الملاحظات</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>معتل أو مضعف</td>
+              <td><span class="tag-name">IV_0</span></td>
+              <td><span class="example-word">يَقولُ، يَمُدُّ</span></td>
+              <td>isBeforeLastDblOrVowel = true</td>
+            </tr>
+            <tr>
+              <td>مهموز العين</td>
+              <td><span class="tag-name">IV_0</span></td>
+              <td><span class="example-word">يَسأَلُ</span></td>
+              <td>isBeforeLastHamza = true</td>
+            </tr>
+            <tr>
+              <td>مهموز الفاء</td>
+              <td><span class="tag-name">IV_0</span></td>
+              <td><span class="example-word">يَأخُذُ</span></td>
+              <td>isFirstHamza = true</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Secondary Tags -->
+    <div class="section" id="secondary-tags">
+      <h2>الوسوم الفرعية (Secondary Tags)</h2>
+      <p>الوسوم الفرعية تمثل الأشكال المصرفة المختلفة للكلمة الأساسية.</p>
+
+      <div class="tag-box">
+        <h3><span class="tag-name">IV_Ann</span> - شكل التنوين</h3>
+        <p><strong>التحويل:</strong> الحرف الأخير (حرف العلة) يتحول إلى ياء</p>
+
+        <div class="example">
+          <h4>مثال تفصيلي:</h4>
+          <table>
+            <tr>
+              <td>الأصل</td>
+              <td class="example-word">يَخشَى</td>
+              <td>الألف المقصورة في الآخر</td>
+            </tr>
+            <tr>
+              <td>بعد التحويل</td>
+              <td class="example-word">يَخشَي</td>
+              <td>الألف تحولت إلى ياء</td>
+            </tr>
+            <tr>
+              <td>الاستخدام</td>
+              <td colspan="2">في حالات النصب: لن يخشيَ، كي يخشيَ</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tag-box">
+        <h3><span class="tag-name">IV_0hwnyn</span> - شكل الإدغام</h3>
+        <p><strong>التحويل:</strong> حذف الحرف الأخير (للأفعال المضعفة)</p>
+
+        <div class="example">
+          <h4>مثال تفصيلي:</h4>
+          <table>
+            <tr>
+              <td>الأصل</td>
+              <td class="example-word">يَمُدُّ</td>
+              <td>الدال مشددة (مد د)</td>
+            </tr>
+            <tr>
+              <td>بعد التحويل</td>
+              <td class="example-word">يَمُدْ</td>
+              <td>حذف الدال الثانية في الجزم</td>
+            </tr>
+            <tr>
+              <td>الأصل</td>
+              <td class="example-word">يَخشَى</td>
+              <td>فعل معتل</td>
+            </tr>
+            <tr>
+              <td>بعد التحويل</td>
+              <td class="example-word">يَخشَ</td>
+              <td>حذف حرف العلة في الجزم</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tag-box">
+        <h3><span class="tag-name">IV_h</span> - شكل الألف/الهاء</h3>
+        <p><strong>التحويل:</strong> الحرف الأخير (ى) يصبح ألفًا (ا)</p>
+
+        <div class="example">
+          <h4>مثال تفصيلي:</h4>
+          <table>
+            <tr>
+              <td>الأصل</td>
+              <td class="example-word">يَخشَى</td>
+              <td>الألف المقصورة (ى)</td>
+            </tr>
+            <tr>
+              <td>بعد التحويل</td>
+              <td class="example-word">يَخشَا</td>
+              <td>تحولت إلى ألف ممدودة (ا)</td>
+            </tr>
+            <tr>
+              <td>الاستخدام</td>
+              <td colspan="2">في بعض اللهجات والقراءات</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tag-box">
+        <h3><span class="tag-name">IV_y</span> - شكل الياء</h3>
+        <p><strong>الشكل:</strong> يبقى الفعل كما هو مع وسم مختلف للأفعال المعتلة</p>
+      </div>
+
+      <div class="tag-box">
+        <h3><span class="tag-name">IV_wA</span> - شكل الواو-ألف</h3>
+        <p><strong>التحويل:</strong> الحرف قبل الأخير يصبح ألفًا طويلة (للأفعال الأجوف)</p>
+
+        <div class="example">
+          <h4>مثال تفصيلي:</h4>
+          <table>
+            <tr>
+              <td>الأصل</td>
+              <td class="example-word">يَقُولُ</td>
+              <td>الواو في الوسط</td>
+            </tr>
+            <tr>
+              <td>بعد التحويل</td>
+              <td class="example-word">يَقَالُ</td>
+              <td>الواو قلبت ألفًا</td>
+            </tr>
+            <tr>
+              <td>الاستخدام</td>
+              <td colspan="2">في البناء للمجهول والأوزان المختلفة</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detailed Examples -->
+    <div class="section" id="examples">
+      <h2>أمثلة تفصيلية</h2>
+
+      <h3>مثال شامل: تحليل كلمة <span class="example-word">يَخشَى</span></h3>
+
+      <div class="highlight">
+        <h4>المدخل:</h4>
+        <p class="example-word" style="font-size: 2rem;">يَخشَى</p>
+
+        <h4>الوسم الرئيسي:</h4>
+        <p><span class="tag-name">IV_0</span>: <span class="example-word">خشى</span></p>
+        <p><small>(بعد حذف حرف المضارعة)</small></p>
+
+        <h4>الوسوم الفرعية:</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>الوسم</th>
+              <th>الشكل</th>
+              <th>الشرح</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag-name">IV_Ann</span></td>
+              <td class="example-word">خشي</td>
+              <td>الألف المقصورة تحولت إلى ياء</td>
+            </tr>
+            <tr>
+              <td><span class="tag-name">IV_0hwnyn</span></td>
+              <td class="example-word">خش</td>
+              <td>حذف حرف العلة في الجزم</td>
+            </tr>
+            <tr>
+              <td><span class="tag-name">IV_h</span></td>
+              <td class="example-word">خشا</td>
+              <td>الألف المقصورة صارت ألفًا ممدودة</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>كلمات الاختبار الموصى بها</h3>
+      <p>الكلمات التالية تغطي معظم الحالات الصرفية:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>الكلمة</th>
+            <th>النوع</th>
+            <th>الخصائص</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="example-word">يَمضِي</td>
+            <td>صحيح</td>
+            <td>فعل صحيح سالم</td>
+          </tr>
+          <tr>
+            <td class="example-word">يَرعى</td>
+            <td>معتل ناقص</td>
+            <td>آخره ألف مقصورة</td>
+          </tr>
+          <tr>
+            <td class="example-word">يَستعمل</td>
+            <td>مزيد ثلاثي</td>
+            <td>على وزن يستفعل</td>
+          </tr>
+          <tr>
+            <td class="example-word">يُؤذن</td>
+            <td>مهموز مجهول</td>
+            <td>مبني للمجهول ومهموز الفاء</td>
+          </tr>
+          <tr>
+            <td class="example-word">يَخشى</td>
+            <td>معتل ناقص</td>
+            <td>آخره ألف مقصورة، مفتوح</td>
+          </tr>
+          <tr>
+            <td class="example-word">يُؤذِن</td>
+            <td>مهموز معلوم</td>
+            <td>مبني للمعلوم ومهموز الفاء</td>
+          </tr>
+          <tr>
+            <td class="example-word">يُؤذَن</td>
+            <td>مهموز مجهول</td>
+            <td>مبني للمجهول بفتح ما قبل الآخر</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Rules Section -->
+    <div class="section" id="rules">
+      <h2>قواعد التصنيف</h2>
+
+      <h3>آلية عمل التصنيف</h3>
+      <div class="highlight">
+        <h4>المرحلة الأولى: تحديد الوسم الرئيسي</h4>
+        <ol>
+          <li>فحص نوع الكلمة (اسم، فعل، أداة)</li>
+          <li>تحديد نوع الفعل (ماضي، مضارع، أمر)</li>
+          <li>فحص الميزات الصرفية:
+            <ul>
+              <li>هل هو متعد أم لازم؟</li>
+              <li>هل هو مبني للمعلوم أم المجهول؟</li>
+              <li>هل حرف المضارعة مفتوح أم مضموم؟</li>
+              <li>هل فيه همزة في الفاء أو العين؟</li>
+              <li>هل فيه حرف معتل أو مضعف؟</li>
+            </ul>
+          </li>
+          <li>تطبيق القواعد لتحديد الوسم المناسب</li>
+        </ol>
+
+        <h4>المرحلة الثانية: توليد الوسوم الفرعية</h4>
+        <ol>
+          <li>بناءً على الوسم الرئيسي، تحديد الأشكال المصرفة الممكنة</li>
+          <li>تطبيق التحويلات المناسبة:
+            <ul>
+              <li>قلب حروف العلة</li>
+              <li>حذف الأحرف في الجزم</li>
+              <li>التعويض والإبدال</li>
+            </ul>
+          </li>
+          <li>إرجاع قائمة بكل الأشكال المصرفة مع وسومها</li>
+        </ol>
+      </div>
+
+      <h3>ملاحظات هامة</h3>
+      <div class="tag-box">
+        <h4>الشكل والتشكيل</h4>
+        <ul>
+          <li>يجب أن تكون الكلمة مشكلة (بالحركات الكاملة)</li>
+          <li>من الأفضل تشكيل ثلاثة أحرف على الأقل:
+            <ol>
+              <li>الحرف الأول (حرف المضارعة)</li>
+              <li>الحرف الثاني (أول حرف من الجذر)</li>
+              <li>قبل الأخير (العين في الثلاثي)</li>
+            </ol>
+          </li>
+          <li>التشكيل الدقيق يحسن من دقة التحليل</li>
+        </ul>
+      </div>
+
+      <div class="tag-box">
+        <h4>الزوائد والصرف</h4>
+        <ul>
+          <li>يجب أن تكون الكلمة مجردة من الزوائد (السوابق واللواحق)</li>
+          <li>بدون ضمائر متصلة</li>
+          <li>بدون "ال" التعريف للأسماء</li>
+          <li>بدون نون التوكيد للأفعال</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Future Work -->
+    <div class="section" id="future">
+      <h2>الأعمال المستقبلية</h2>
+
+      <div class="highlight">
+        <h3>التطويرات المقترحة:</h3>
+
+        <h4>1. إكمال جداول القرار</h4>
+        <p>
+          تم إنجاز جداول القرار فقط لوسوم IV (الأفعال المضارعة). يجب إكمال:
+        </p>
+        <ul>
+          <li>وسوم PV (الأفعال الماضية)</li>
+          <li>وسوم N (الأسماء)</li>
+          <li>وسوم CV (أفعال الأمر)</li>
+          <li>وسوم FW (الأدوات)</li>
+        </ul>
+
+        <h4>2. التسلسل الهرمي للأصناف</h4>
+        <p>
+          ترتيب الأصناف البرمجية في تسلسل هرمي منطقي:
+        </p>
+        <ul>
+          <li><code>VocStem</code> - الصنف الأساسي</li>
+          <li><code>VocVerb</code> - يرث من VocStem</li>
+          <li><code>VocPV</code> و <code>VocIV</code> - يرثان من VocVerb</li>
+          <li>كل صنف له دوال خاصة به حسب درجة التخصص</li>
+        </ul>
+
+        <h4>3. خوارزميات متقدمة</h4>
+        <ul>
+          <li>إدخال خوارزميات معالجة اللغات الطبيعية (NLP) المتقدمة</li>
+          <li>التعلم الآلي للتحسين التلقائي</li>
+          <li>تقليل الحاجة إلى التدخل البشري</li>
+        </ul>
+
+        <h4>4. التحليل الصرفي الآلي</h4>
+        <ul>
+          <li>استخدام أدوات مثل "الخليل" للتحليل الصرفي التلقائي</li>
+          <li>استخراج الجذور آليًا</li>
+          <li>تحديد الحروف الأصلية والزائدة</li>
+        </ul>
+
+        <h4>5. توسيع التغطية</h4>
+        <ul>
+          <li>دعم جميع أنواع الكلمات العربية</li>
+          <li>التعامل مع اللهجات المختلفة</li>
+          <li>دعم النصوص التاريخية والكلاسيكية</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- References -->
+    <div class="section">
+      <h2>المراجع والمصادر</h2>
+      <ul>
+        <li>معجم بكوالتر للتحليل الصرفي العربي (BAMA)</li>
+        <li>التقرير الفني المفصل (متوفر باللغة العربية)</li>
+        <li>ملفات Excel الأصلية:
+          <ul>
+            <li>TagsClassified.xlsx - تصنيف الوسوم</li>
+            <li>TagsComments.xlsx - ملاحظات على الوسوم</li>
+          </ul>
+        </li>
+        <li>قواعد اللغة العربية التقليدية</li>
+        <li>أبحاث معالجة اللغات الطبيعية للغة العربية</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>
+      <strong>الحقوق:</strong> عمر الزهيبي وأحمد أمان (2012)
+      <br>
+      <strong>الترخيص:</strong> GPL-3.0
+      <br>
+      <strong>التحديث:</strong> 2025 - نسخة حديثة للويب
+    </p>
+    <p style="margin-top: 1rem;">
+      <a href="index.html" style="color: #667eea;">← العودة للرئيسية / Back to Home</a>
+    </p>
+  </div>
+</body>
+</html>
